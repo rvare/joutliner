@@ -8,7 +8,7 @@ import javax.swing.tree.*;
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
 
-public class View extends JFrame {
+public class View extends JFrame implements ActionListener {
 	private DefaultMutableTreeNode rootNode;
 	private DefaultTreeModel treeModel;
 	private JTree tree;
@@ -21,14 +21,19 @@ public class View extends JFrame {
 	private static short DEFAULT_HEIGHT = 500;
 	private static String TITLE = "JOutliner";
 
+	private static String ADD_COMMAND = "add";
+	private static String REMOVE_COMMAND = "remove";
+
 	public View() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Create buttons
 		this.newButton = new JButton("New");
-		this.newButton.setActionCommand("add");
+		this.newButton.setActionCommand(ADD_COMMAND);
+		this.newButton.addActionListener(this);
 		this.deleteButton = new JButton("Delete");
-		this.deleteButton.setActionCommand("remove");
+		this.deleteButton.setActionCommand(REMOVE_COMMAND);
+		this.deleteButton.addActionListener(this);
 
 		// Create button pane
 		JPanel buttonPanel = new JPanel();
@@ -62,6 +67,20 @@ public class View extends JFrame {
 		// Finish frame
 		this.setTitle(this.TITLE);
 		this.setSize(this.DEFAULT_WIDTH, this.DEFAULT_HEIGHT);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String command = e.getActionCommand();
+
+		if (ADD_COMMAND.equals(command)) {
+			System.out.println("New command");
+			this.addObject("New Node");
+		}
+		else if(REMOVE_COMMAND.equals(command)) {
+			System.out.println("Remove command");
+			this.removeCurrentNode();
+		}
 	}
 
 	public void clear() {
@@ -104,12 +123,12 @@ public class View extends JFrame {
 		DefaultMutableTreeNode childNode = new DefaultMutableTreeNode(child);
 
 		if (parent == null) {
-			parent = this.rootNode;
+			parent = rootNode;
 		}
 
 		treeModel.insertNodeInto(childNode, parent, parent.getChildCount());
 
-		if (shouldBeVisible) {
+		if (shouldBeVisible) { // Makes sure the user sees new node.
 			tree.scrollPathToVisible(new TreePath(childNode.getPath()));
 		}
 		return childNode;
