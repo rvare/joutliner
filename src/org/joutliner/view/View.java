@@ -20,6 +20,7 @@ public class View extends JFrame {
 	private static String TITLE = "JOutliner";
 
 	public View() {
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// Create buttons
 		this.newButton = new JButton("New");
 		this.deleteButton = new JButton("Delete");
@@ -32,10 +33,18 @@ public class View extends JFrame {
 
 		// Create split panel
 		// Left panel
-		JPanel leftPanel = new JPanel();
-		leftPanel.add(new JLabel("Left"));
+		this.rootNode = new DefaultMutableTreeNode("Root Node");
+		this.treeModel = new DefaultTreeModel(this.rootNode);
+		this.tree = new JTree(this.treeModel);
+		this.tree.setEditable(true);
+		this.tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+		this.tree.setShowsRootHandles(true);
 
-		// Left panel
+		JPanel leftPanel = new JPanel();
+		// leftPanel.add(new JLabel("Left"));
+		leftPanel.add(this.tree);
+
+		// Right panel
 		JPanel rightPanel = new JPanel();
 		rightPanel.add(new JLabel("Right"));
 
