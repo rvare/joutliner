@@ -18,18 +18,62 @@ public class View extends JFrame implements ActionListener {
 
 	private TreeOutline treeOutline;
 
+	private JMenuBar menuBar;
+	private JMenu menu;
+
+	private JMenuItem openFileItem;
+	private JMenuItem newFileItem;
+	private JMenuItem saveFileItem;
+	private JMenuItem saveAsFileItem;
+	private JMenuItem exportItem;
+	private JMenuItem aboutItem;
+	private JMenuItem manualItem;
+
 	private JButton newButton;
 	private JButton deleteButton;
 
-	private static short DEFAULT_WIDTH = 500;
-	private static short DEFAULT_HEIGHT = 500;
-	private static String TITLE = "JOutliner";
+	private static final short DEFAULT_WIDTH = 500;
+	private static final short DEFAULT_HEIGHT = 500;
+	private static final String TITLE = "JOutliner";
 
 	private static String ADD_COMMAND = "add";
 	private static String REMOVE_COMMAND = "remove";
 
 	public View() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		// Create menu bar
+		this.menuBar = new JMenuBar();
+		this.setJMenuBar(this.menuBar);
+
+		// Create file menu and its item
+		JMenu fileMenu = new JMenu("File");
+		this.menuBar.add(fileMenu);
+
+		this.openFileItem = new JMenuItem("Open");
+		fileMenu.add(this.openFileItem);
+
+		this.newFileItem = new JMenuItem("New");
+		fileMenu.add(this.newFileItem);
+
+		this.saveFileItem = new JMenuItem("Save");
+		fileMenu.add(this.saveFileItem);
+
+		this.saveAsFileItem = new JMenuItem("Save As");
+		fileMenu.add(this.saveAsFileItem);
+
+		this.exportItem = new JMenuItem("Export");
+		fileMenu.add(this.exportItem);
+
+		// Create help menu
+		JMenu helpMenu = new JMenu("Help");
+		this.menuBar.add(helpMenu);
+
+		this.manualItem = new JMenuItem("Manual");
+		helpMenu.add(this.manualItem);
+
+		this.aboutItem = new JMenuItem("About");
+		helpMenu.add(this.aboutItem);
 
 		// Create buttons
 		this.newButton = new JButton("New");
