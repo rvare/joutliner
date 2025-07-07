@@ -9,6 +9,7 @@ import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
 
 import org.joutliner.view.TreeOutline;
+import org.joutliner.view.Editor;
 
 public class View extends JFrame implements ActionListener {
 	private DefaultMutableTreeNode rootNode;
@@ -17,6 +18,8 @@ public class View extends JFrame implements ActionListener {
 	private Toolkit toolKit;
 
 	private TreeOutline treeOutline;
+
+	private Editor editor;
 
 	private JMenuBar menuBar;
 	private JMenu menu;
@@ -79,6 +82,7 @@ public class View extends JFrame implements ActionListener {
 		this.newButton = new JButton("New");
 		this.newButton.setActionCommand(ADD_COMMAND);
 		this.newButton.addActionListener(this);
+
 		this.deleteButton = new JButton("Delete");
 		this.deleteButton.setActionCommand(REMOVE_COMMAND);
 		this.deleteButton.addActionListener(this);
@@ -94,11 +98,10 @@ public class View extends JFrame implements ActionListener {
 		this.treeOutline = new TreeOutline();
 
 		// Right panel
-		JPanel rightPanel = new JPanel();
-		rightPanel.add(new JLabel("Right"));
+		this.editor = new Editor();
 
 		// Establish splitpane
-		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, this.treeOutline, rightPanel);
+		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, this.treeOutline, this.editor);
 		splitPane.setOneTouchExpandable(true);
 		splitPane.setDividerLocation(250);
 		this.getContentPane().add(splitPane);
@@ -106,7 +109,7 @@ public class View extends JFrame implements ActionListener {
 		// Finish frame
 		this.setTitle(this.TITLE);
 		this.setSize(this.DEFAULT_WIDTH, this.DEFAULT_HEIGHT);
-	}
+	} // End constructor
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
