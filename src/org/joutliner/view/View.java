@@ -32,14 +32,16 @@ public class View extends JFrame implements ActionListener {
 	private JMenuItem aboutItem;
 	private JMenuItem manualItem;
 
-	private JButton newButton;
+	private JButton newChildButton;
+	private JButton newSiblingButton;
 	private JButton deleteButton;
 
 	private static final short DEFAULT_WIDTH = 500;
 	private static final short DEFAULT_HEIGHT = 500;
 	private static final String TITLE = "JOutliner";
 
-	private static String ADD_COMMAND = "add";
+	private static String ADD_CHILD = "add_child";
+	private static String ADD_SIBLING = "add_sibling";
 	private static String REMOVE_COMMAND = "remove";
 
 	public View() {
@@ -79,9 +81,13 @@ public class View extends JFrame implements ActionListener {
 		helpMenu.add(this.aboutItem);
 
 		// Create buttons
-		this.newButton = new JButton("New");
-		this.newButton.setActionCommand(ADD_COMMAND);
-		this.newButton.addActionListener(this);
+		this.newChildButton = new JButton("New Child");
+		this.newChildButton.setActionCommand(ADD_CHILD);
+		this.newChildButton.addActionListener(this);
+
+		this.newSiblingButton = new JButton("New Sibling");
+		this.newSiblingButton.setActionCommand(ADD_SIBLING);
+		this.newSiblingButton.addActionListener(this);
 
 		this.deleteButton = new JButton("Delete");
 		this.deleteButton.setActionCommand(REMOVE_COMMAND);
@@ -89,7 +95,8 @@ public class View extends JFrame implements ActionListener {
 
 		// Create button pane
 		JPanel buttonPanel = new JPanel();
-		buttonPanel.add(this.newButton);
+		buttonPanel.add(this.newChildButton);
+		buttonPanel.add(this.newSiblingButton);
 		buttonPanel.add(this.deleteButton);
 		this.getContentPane().add(BorderLayout.NORTH, buttonPanel);
 
@@ -115,9 +122,12 @@ public class View extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
 
-		if (ADD_COMMAND.equals(command)) {
-			System.out.println("New command");
+		if (ADD_CHILD.equals(command)) {
+			System.out.println("New child command");
 			this.treeOutline.addObject("New Node");
+		}
+		else if (ADD_SIBLING.equals(command)) {
+			System.out.println("Add sibling command");
 		}
 		else if(REMOVE_COMMAND.equals(command)) {
 			System.out.println("Remove command");

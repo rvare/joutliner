@@ -24,6 +24,13 @@ public class TreeOutline extends JPanel {
 		this.tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 		this.tree.setShowsRootHandles(true);
 
+		DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
+		Icon icon = null;
+		renderer.setLeafIcon(icon);
+		renderer.setClosedIcon(icon);
+		renderer.setOpenIcon(icon);
+		this.tree.setCellRenderer(renderer);
+
 		this.add(new JScrollPane(this.tree));
 	}
 
