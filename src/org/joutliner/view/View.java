@@ -85,9 +85,9 @@ public class View extends JFrame implements ActionListener {
 		this.newChildButton.setActionCommand(ADD_CHILD);
 		this.newChildButton.addActionListener(this);
 
-		this.newSiblingButton = new JButton("New Sibling");
-		this.newSiblingButton.setActionCommand(ADD_SIBLING);
-		this.newSiblingButton.addActionListener(this);
+		// this.newSiblingButton = new JButton("New Sibling");
+		// this.newSiblingButton.setActionCommand(ADD_SIBLING);
+		// this.newSiblingButton.addActionListener(this);
 
 		this.deleteButton = new JButton("Delete");
 		this.deleteButton.setActionCommand(REMOVE_COMMAND);
@@ -96,7 +96,7 @@ public class View extends JFrame implements ActionListener {
 		// Create button pane
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.add(this.newChildButton);
-		buttonPanel.add(this.newSiblingButton);
+		// buttonPanel.add(this.newSiblingButton);
 		buttonPanel.add(this.deleteButton);
 		this.getContentPane().add(BorderLayout.NORTH, buttonPanel);
 
