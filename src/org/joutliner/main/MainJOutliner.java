@@ -8,8 +8,8 @@ import org.joutliner.model.*;
 public class MainJOutliner {
 	public static void main(String[] args) {
 		System.out.println("Init");
-		// View view = new View();
-		// view.setVisible(true);
-		Mode model = new Model();
+		Model model = new Model();
+		View view = new View();
+		view.setVisible(true);
 	}
 }
